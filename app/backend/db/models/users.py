@@ -30,8 +30,8 @@ class User(Base):
     def __repr__(self):
         return f"<User(id={self.id}, name='{self.name}', email='{self.email}')>"
     
-    def hashed_password(self):
-        return generate_password_hash(self.password)
+    def hash_password(self):
+        self.password = generate_password_hash(self.password)
     
     def check_password(self, password):
         return check_password_hash(self.password, password)

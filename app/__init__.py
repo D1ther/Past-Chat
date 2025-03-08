@@ -7,6 +7,7 @@ app = Flask(__name__,
             static_folder='frontend/static')
 
 from app.frontend.routers import *
+from app.backend.routers import *
 
 def main():
-    app.run(port=5000, debug=True)
+    app.run(port=5000, host='0.0.0.0', debug=True)
