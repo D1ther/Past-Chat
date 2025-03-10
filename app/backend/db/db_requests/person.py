@@ -22,3 +22,12 @@ def add_new_person(name, description, prompt, avatar):
             session.commit()
 
             return jsonify({'message': 'Person added successfully'}), 200
+        
+def get_person_by_id(person_id):
+    with Session() as session:
+        person = session.query(Person).where(Person.id == person_id).one_or_none()
+
+        if person:
+            return person
+        else:
+            return None
