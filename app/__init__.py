@@ -15,6 +15,7 @@ app = Flask(__name__,
             static_folder='frontend/static')
 
 AI_API_KEY = os.getenv('AI_API_KEY')
+API_URL = os.getenv('API_URL')
 
 from app.frontend.routers import *
 from app.backend.routers import *

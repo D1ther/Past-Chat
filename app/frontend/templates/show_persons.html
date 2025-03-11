@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+
+{% block main %}
+    {% if persons %}
+        <ul class='person-cards'>
+            {% for person in persons %}
+                    <li class='card'>
+                        <a href='/person/chat/{{person.id}}'>
+                            <img src='data:image/png;base64,{{ person.avatar }}' alt='{{person.name}}' class='person-avatar'>
+
+                            <h2 class='person-name'>
+                                {{person.name}}
+                            </h2>
+                        </a>
+                    </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock main %}
