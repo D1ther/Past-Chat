@@ -31,3 +31,10 @@ def get_person_by_id(person_id):
             return person
         else:
             return None
+        
+def get_all_persons():
+    with Session() as session:
+        
+        persons = session.query(Person).all()
+
+        return [person.to_dict() for person in persons]

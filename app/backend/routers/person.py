@@ -3,7 +3,8 @@ from flask import (
 )
 
 from app.backend.db.db_requests import (
-    add_new_person
+    add_new_person,
+    get_all_persons
 )
 
 from app import (
@@ -23,3 +24,6 @@ def add_person_api():
 
     return add_new_person(name, description, prompt, avatar)
 
+@app.get('/api/v1.0/get_all_persons')
+def get_all_persons_api():
+    return get_all_persons(), 200

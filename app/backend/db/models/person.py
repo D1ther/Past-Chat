@@ -13,6 +13,8 @@ from app.backend.db.base import (
     Base
 )
 
+import base64
+
 class Person(Base):
     __tablename__ = 'history_persons'
 
@@ -24,3 +26,12 @@ class Person(Base):
 
     def __repr__(self):
         return f"<Person(id={self.id}, name='{self.name}', description='{self.description}', prompt='{self.prompt}')>"
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'prompt': self.prompt,
+            'avatar': base64.b64encode(self.avatar).decode('utf-8')
+        }
