@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Додати Персону</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_person.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Додати Історичну Персону</h2>
+        <form method="POST">
+            <label for="name">Ім'я:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="birth_date">Дата Народження:</label>
+            <input type="date" id="birth_date" name="birth_date" required>
+
+            <label for="description">Опис:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <button type="submit">Додати</button>
+        </form>
+    </div>
+</body>
+</html>
