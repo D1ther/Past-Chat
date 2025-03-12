@@ -19,7 +19,7 @@ from app import (
 def chat_with_ai_api(person_id):
     data = request.get_json()
 
-    system_prompt = get_person_by_id(person_id=person_id).prompt
+    system_prompt = get_person_by_id(person_id=person_id)['prompt']
     user_prompt = data['user_prompt']
 
     return jsonify({'message':generate_ai_answer(system_prompt=system_prompt, user_prompt=user_prompt)}), 200
