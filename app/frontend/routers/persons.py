@@ -2,7 +2,8 @@ from flask import (
     render_template,
     request,
     url_for,
-    redirect
+    redirect,
+    session
 )
 
 from app import (
@@ -38,3 +39,23 @@ def add_persone():
             return render_template('add_person.html', error=add_persone_response.json()['message'])
         
     return render_template('add_person.html')
+
+@app.route('/chat/<int:person_id>', methods=['GET'])
+def chat_with_person(person_id):
+    if 'chat_history' not in session:
+        session['chat_history'] = []
+
+    person_response = requests.get(f'{API_URL}/get_person_by_id/{person_id}')
+    if person_response.status_code != 200:
+        return render_template('chat_form.html', error="Персона не знайдена"), 404
+
+    person_data = person_response.json()
+    person = {
+        'id': person_data['id'],
+        'name': person_data['name'],
+        'description': person_data['description'],
+        'prompt': person_data['prompt'],
+        'avatar': f"data:image/png;base64,{person_data['avatar']}"
+    }
+
+    return render_template('chat_form.html', person=person, chat_history=session['chat_history'])

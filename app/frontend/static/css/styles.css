@@ -50,6 +50,11 @@ h1 {
     font-style: italic;
 }
 
+.nav-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
 /* футер */
 
 footer {
@@ -180,4 +185,119 @@ footer {
     border-radius: 5px;
     text-align: center;
     margin-bottom: 10px;
+}
+
+/* Чат з персоною */
+
+.chat_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 150vh;
+    padding: 20px;
+    background: #f6f0d5;
+    border-radius: 10px;
+}
+
+.person {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.person img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 5px solid #5a4a3d;
+}
+
+.person h2 {
+    color: #5a4a3d;
+    margin-top: 15px;
+    font-size: 26px;
+}
+
+.chat_history {
+    flex-grow: 1;
+    width: 100%;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #3e3329;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message.user {
+    background-color: #f7902a;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    align-self: flex-end;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.message.ai {
+    background-color: #5a4a3d;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    align-self: flex-start;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    resize: none;
+    margin-bottom: 15px;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #f7902a;
+    box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+}
+
+button {
+    padding: 12px;
+    background-color: #f7902a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #b67041;
+}
+
+.error {
+    background-color: #ff4c4c;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 15px;
 }

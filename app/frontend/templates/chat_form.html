@@ -1,0 +1,76 @@
+{% extends "index.html" %}
+
+{% block main %}
+    {% if error %}
+        <div class='error'>{{ error }}</div>
+    {% endif %}
+
+    <div class="chat_container">
+        <div class='person'>
+            <img src="{{ person.avatar }}" alt="{{ person.name }}">
+            <h2>{{ person.name }}</h2>
+        </div>
+
+        <div class="chat_history" id="chat-history">
+            {% for msg in chat_history %}
+                <div class="message {{ 'user' if msg.role == 'user' else 'ai' }}">
+                    {{ msg.text }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <form id="chat-form">
+            <textarea name="message" id="message-field" placeholder="Надішліть ваше повідомлення" required></textarea>
+            <button type="submit">Надіслати</button>
+        </form>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+        <script>
+            const socket = io.connect('http://' + document.domain + ':' + location.port);
+        
+            document.getElementById('chat-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                sendMessage();
+            });
+        
+            document.getElementById('message-field').addEventListener('keypress', function(event) {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault(); // Запобігає переходу на новий рядок
+                    sendMessage();
+                }
+            });
+        
+            function sendMessage() {
+                const message = document.getElementById('message-field').value;
+                const personId = {{ person.id }};
+                
+                socket.emit('send_message', {
+                    person_id: personId,
+                    message: message
+                });
+        
+                const userMessageDiv = document.createElement('div');
+                userMessageDiv.classList.add('message', 'user');
+                userMessageDiv.innerText = message;
+                document.getElementById('chat-history').appendChild(userMessageDiv);
+        
+                document.getElementById('message-field').value = '';
+                scrollToBottom();
+            }
+        
+            socket.on('receive_message', function(data) {
+                const aiMessageDiv = document.createElement('div');
+                aiMessageDiv.classList.add('message', 'ai');
+                aiMessageDiv.innerText = data.text;
+                document.getElementById('chat-history').appendChild(aiMessageDiv);
+        
+                scrollToBottom();
+            });
+        
+            function scrollToBottom() {
+                const chatHistory = document.getElementById('chat-history');
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }
+        </script>
+        
+{% endblock main %}
