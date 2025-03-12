@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+{% block main %}
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <div class="form-container">
+        <h2>Додати Історичну Персону</h2>
+        <form method="POST" action='/add_person' enctype="multipart/form-data">
+
+            <input type="text" id="name" name="name" placeholder="Ім'я" required>
+
+            <textarea id="prompt-person" name="prompt_person" placceholder='Промпт англійською' required></textarea>
+
+            <textarea id="description" name="description" placeholder='Опис' required></textarea>
+
+            <input type="file" id="avatar" name="avatar" placeholder='Зображення персонажа' required>
+
+            <button type="submit">Додати</button>
+        </form>
+    </div>
+{% endblock main %}

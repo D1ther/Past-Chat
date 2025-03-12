@@ -15,7 +15,7 @@ def add_new_person(name, description, prompt, avatar):
         person = session.query(Person).where(Person.name == name).one_or_none()
 
         if person:
-            return jsonify({'message': 'Person with this name already exists'}), 400
+            return jsonify({"message": "Персона з таким ім'ям вже існує в базі"}), 400
         else:
             person = Person(name=name, description=description, prompt=prompt, avatar=avatar)
             session.add(person)
