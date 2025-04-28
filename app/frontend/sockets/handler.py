@@ -17,6 +17,8 @@ import requests
 def handle_message(data):
     person_id = data['person_id']
     user_message = data['message']
+
+    session['chat_history'] = []
     
     session['chat_history'].append({'role': 'user', 'text': user_message})
     

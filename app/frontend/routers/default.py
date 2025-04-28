@@ -1,5 +1,6 @@
 from flask import (
-    render_template
+    render_template,
+    session
 )
 
 import requests
@@ -10,7 +11,7 @@ from app import (
 )
 
 @app.route('/')
-def default():
+def default(): 
     persons_response = requests.get(f'{API_URL}/get_all_persons')
 
     if persons_response.status_code == 200:

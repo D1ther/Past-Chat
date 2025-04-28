@@ -1,0 +1,7 @@
+version: "2"
+authtoken: 2wMlBkUMRZPP2xwFHCvTLwHVAPx_CPvmqbEJDtGMu2P3WxDW
+tunnels:
+  flask-app:
+    addr: 5000
+    proto: http
+    bind_tls: true
